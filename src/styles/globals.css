@@ -1,6 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kite+One&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body{
+  font-family: 'jost', sans-serif;
+}
+.sectionfive{
+    font-family: "Kite One", sans-serif;
+}
 
 .btn-color{
   background-color: #0dcaf0;
@@ -12,3 +22,60 @@
 .text-hover:hover{
   color: #0dcaf0;
 }
+.hero{
+  background-image: url("/HeroSection.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+  min-height: 132px;
+  max-height: 165px;
+
+}
+
+@media (min-width: 1024px){
+  .hero{
+    min-height: 346px;
+    max-height: 348px;
+  }
+}
+
+
+
+@media (min-width: 1024px){
+  .hero{
+    min-height: 446px;
+    max-height: 448px;
+  }
+}
+
+
+
+@media (min-width: 768px){
+.login{
+  background-image: url("/Login.png");
+   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  /* min-height: 132px;
+  max-height: 165px; */
+
+
+}
+}
+
+@media (min-width: 768px){
+.signup{
+  background-image: url("/signup.png");
+   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  /* min-height: 132px;
+  max-height: 165px; */
+
+
+}
+}
+
