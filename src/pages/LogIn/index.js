@@ -7,19 +7,19 @@ import Link from "next/link";
 const LogIn = () => {
   return (
     <div className="login flex justify-center items-center">
-      <form
-        className="mt-3 lg:w-6/12 lg:h-4/6 lg:rounded-3xl lg:bg-[#ffffffee]"
-      >
+      <form className="mt-3 lg:w-6/12 lg:h-4/6 lg:rounded-3xl lg:bg-[#ffffffee]">
         <div className="  lg:mt-10 flex flex-col justify-center items-center">
-          <div className="mb-10 lg:mb-3">
-            <Image src="/JOBME.png" width={100} height={100} alt="signin-logo"/>
-          </div>
+          <Link href="/" className="flex items-center py-4 px-2 ">
+            <Image src="/JOBME.png" width={100} height={100} alt="logo" />
+          </Link>
 
           <h1 className="font-semibold text-2xl lg:text-2xl">Welcome back!</h1>
-          <p className="font-semibold text-xl lg:text-xl">Log in to hit your dream job!</p>
+          <p className="font-semibold text-xl lg:text-xl">
+            Log in to hit your dream job!
+          </p>
 
           <div className="border-2 rounded-xl p-3 w-80 mt-5 lg:p-2">
-            <input type="email"  placeholder="Email Address" />
+            <input type="email" placeholder="Email Address" />
           </div>
           <div className=" border-2 rounded-lg p-3 w-80 mt-5 lg:p-2 ">
             <input type="password" id="password" placeholder="Password" />
@@ -42,16 +42,33 @@ const LogIn = () => {
           <div className="bg-[#0DCAF0] text-white w-80 h-10 lg:p-2 rounded-xl text-lg mt-5 text-center p-2 ">
             <button className="">Log In</button>
           </div>
-          <p className="font-semibold text-lg mt-10 lg:mt-3">Or continue with</p>
+          <p className="font-semibold text-lg mt-10 lg:mt-3">
+            Or continue with
+          </p>
           <div className="flex flex-row gap-3 mt-3">
             <div>
-              <Image src="/devicon_facebook.jpg" width={35} height={35} alt="facebook" />
+              <Image
+                src="/devicon_facebook.jpg"
+                width={35}
+                height={35}
+                alt="facebook"
+              />
             </div>
             <div>
-              <Image src="/devicon_google.jpg" width={35} height={35} alt="google" />
+              <Image
+                src="/devicon_google.jpg"
+                width={35}
+                height={35}
+                alt="google"
+              />
             </div>
             <div>
-              <Image src="/devicon_linkedIn.jpg" width={35} height={35}  alt="linkdin"/>
+              <Image
+                src="/devicon_linkedIn.jpg"
+                width={35}
+                height={35}
+                alt="linkdin"
+              />
             </div>
           </div>
 
@@ -60,7 +77,7 @@ const LogIn = () => {
               <p className="">Dont have an account?</p>
             </div>
             <div className="">
-              <Link href="/SignUp">
+              <Link href="/signup">
                 <button className="text-[#0DCAF0]">Sign Up</button>
               </Link>
             </div>

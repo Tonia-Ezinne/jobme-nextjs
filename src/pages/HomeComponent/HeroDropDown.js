@@ -2,33 +2,33 @@ import React from 'react'
 
 const HeroDropDown = () => {
   return (
-    <div className="bg-[#0dcaf063] w-full p-4 ">
-      <div className="flex flex-row justify-between gap-2 w-4/5 mx-auto">
-        <div className="font-semibold">
-          <select className="rounded-lg  p-1">
-            <option>Select Job Type</option>
+    <div className="bg-[#0dcaf063] lg:py-4 md:py-2  ">
+      <div className="w-11/12 container mx-auto flex flex-row justify-between  md:gap-3 ">
+        <div className=" lg:w-44  md:w-36 md:h-11 bg-white rounded-lg flex justify-center items-center ">
+          <select className="rounded-lg   md:p-0">
+            <option >Select Job Type</option>
           </select>
         </div>
 
-        <div className="font-semibold">
-          <select className="rounded-lg p-1">
+        <div className=" lg:w-44 md:w-36 md:h-11 bg-white rounded-lg flex justify-center items-center ">
+          <select className="rounded-lg  md:p-0">
             <option>Select Industry</option>
           </select>
         </div>
 
-        <div className="font-semibold">
-          <select className="rounded-lg p-1">
+        <div className=" lg:w-48 md:w-44 md:h-11 bg-white rounded-lg flex justify-center items-center ">
+          <select className="rounded-lg md:p-0">
             <option>Select Mode of Work</option>
           </select>
         </div>
 
-        <div className="font-semibold">
-          <select className="rounded-lg p-1">
+        <div className=" lg:w-44 md:w-36 md:h-11 bg-white rounded-lg flex justify-center items-center">
+          <select className="rounded-lg md:p-0">
             <option>Select Location</option>
           </select>
         </div>
         <div>
-          <button className="text-white p-1 bg-[#0DCAF0] rounded-lg md:p-1 font-semibold ">
+          <button className="text-white lg:w-44  md:w-24 md:h-11 bg-[#0DCAF0]  md:p-2   rounded-lg flex justify-center items-center">
             Find Jobs
           </button>
         </div>

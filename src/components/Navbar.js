@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-white shadow-lg">
-        <div className="w-11/12 container mx-auto px-4">
+        <div className="w-11/12 container mx-auto">
           <div className="flex justify-between">
             <div className="flex space-x-7">
               <div>
@@ -38,12 +38,12 @@ const Navbar = () => {
             </div>
 
             <div className="max-sm:hidden md:visible flex justify-center gap-3">
-              <Link href="/LogIn">
+              <Link href="/login">
                 <button className="w-16 h-10 my-auto rounded btn-color text-white hover:bg-white hover:text-black">
                   Log In
                 </button>
               </Link>
-              <Link href="/SignUp">
+              <Link href="/signup">
                 <button className="w-16 h-10 my-auto rounded hover-btn hover:text-white">
                   Sign Up
                 </button>
