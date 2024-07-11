@@ -1,8 +1,17 @@
-import { useState } from 'react';
+"use client"
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image'
+import Cookies  from 'js-cookie';
+import logout from '../../utils/logout';
 
 const Navbar = () => {
+  // const userToken = Cookies.get("token");
+  const [userToken, setUserToken]= useState(null)
+  useEffect(()=>{
+    const token = Cookies.get('token')
+    setUserToken(token)
+  },[])
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <>
@@ -12,7 +21,7 @@ const Navbar = () => {
             <div className="flex space-x-7">
               <div>
                 <Link href="/" className="flex items-center py-4 px-2 ">
-                  <Image src="/JOBME.png" width={100} height={100} alt='logo' />
+                  <Image src="/JOBME.png" width={100} height={100} alt="logo" />
                 </Link>
               </div>
             </div>
@@ -36,19 +45,36 @@ const Navbar = () => {
                 Contact Us
               </Link>
             </div>
+              {/* <Link
+                href="/"
+                className="py-4 px-2 text-gray-500 text-hover transition duration-300"
+                >
+                LOGOUT
+                </Link> */}
+            {userToken ?   
+             <button  
+             onClick={logout}              
+                className="py-4 px-2 text-gray-500 text-hover transition duration-300"
+              >
+                LOGOUT
+              </button> : 
+                           <div className="max-sm:hidden md:visible flex justify-center gap-3">
+                              <Link href="/login">
+                                <button className="py-1 p-1 mt-3 my-auto rounded-md btn-color text-white hover:bg-white hover:text-black">
+                                  Log In
+                                </button>
+                              </Link>
+                              <Link href="/signup">
+                                <button className="py-1 p-1 mt-3 my-auto rounded-md hover-btn hover:text-white">
+                                  Sign Up
+                                </button>
+                              </Link>
+                            </div> 
+              
+              }
+          
 
-            <div className="max-sm:hidden md:visible flex justify-center gap-3">
-              <Link href="/login">
-                <button className="w-16 h-10 my-auto rounded btn-color text-white hover:bg-white hover:text-black">
-                  Log In
-                </button>
-              </Link>
-              <Link href="/signup">
-                <button className="w-16 h-10 my-auto rounded hover-btn hover:text-white">
-                  Sign Up
-                </button>
-              </Link>
-            </div>
+           
 
             <div className="md:hidden flex items-center">
               <button

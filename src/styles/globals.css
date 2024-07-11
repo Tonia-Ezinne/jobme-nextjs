@@ -12,6 +12,52 @@ body{
     font-family: "Kite One", sans-serif;
 }
 
+.loader {
+  display: flex;
+  gap: 0.6em;
+  list-style: none;
+}
+
+.dots {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+#dot-1 {
+  animation: loader-1 0.6s infinite ease-in-out;
+}
+
+@keyframes loader-1 {
+  50% {
+    opacity: 0;
+    transform: translateY(-0.3em);
+  }
+}
+
+#dot-2 {
+  animation: loader-2 0.6s 0.3s infinite ease-in-out;
+}
+
+@keyframes loader-2 {
+  50% {
+    opacity: 0;
+    transform: translateY(-0.3em);
+  }
+}
+
+#dot-3 {
+  animation: loader-3 0.6s 0.6s infinite ease-in-out;
+}
+
+@keyframes loader-3 {
+  50% {
+    opacity: 0;
+    transform: translateY(-0.3em);
+  }
+}
+
 .btn-color{
   background-color: #0dcaf0;
 }
@@ -71,11 +117,47 @@ body{
    background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 140vh;
   /* min-height: 132px;
   max-height: 165px; */
 
 
 }
+}
+
+@media (min-width: 1024px){
+.signup{
+  background-image: url("/signup.png");
+   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 105vh;
+
+}
+}
+
+
+@media (min-width: 1440px){
+.signup{
+  background-image: url("/signup.png");
+   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 105vh;
+
+}
+}
+.contact{
+  background-image: url("/conhero.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 35vh;
+  width: 100%;
+  
+  
+  /* min-height: 190px;
+  max-height: 165px;  */
+  
 }
 

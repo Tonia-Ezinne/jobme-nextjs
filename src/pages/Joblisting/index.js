@@ -2,8 +2,10 @@ import React from 'react'
 
 const JobListing = () => {
   return (
-    <div>JobListing</div>
-  )
+   <div>
+    
+   </div>
+  );
 }
 
 export default JobListing

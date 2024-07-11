@@ -1,16 +1,108 @@
-import React from 'react'
+"use client";
+import React from "react";
 import Image from "next/image";
-import { FaEye } from "react-icons/fa";
-import Link from "next/link";
+import { IoEye } from "react-icons/io5";
+import { AiFillEyeInvisible } from "react-icons/ai";
 
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
+import { useState } from "react";
+import Loading from "@/components/loader/Loading";
 
 const SignUp = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const [loading, setLoading] = useState(false);
+
+  const password = watch("password");
+  const [formError, setFormError] = useState("");
+
+  const onSubmit = async (data) => {
+    setLoading(true);
+
+    console.log(data);
+    try {
+      const formData = {
+        firstname: data.firstname,
+        lastname: data.lastname,
+        email: data.email,
+        password: data.password,
+      };
+      console.log(formData);
+
+      const res = await fetch("api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      console.log(res);
+      setLoading(false);
+      if (res.status === 409) {
+        setFormError("User already exist");
+      }
+      const responseData = await res.json();
+      console.log(responseData);
+      // console.log(res.json());
+
+      if (res.ok) {
+        setLoading(false);
+        toast.success("Registration Successful");
+        reset();
+        setFormError("");
+
+        //you can add additional logic here like a toast, redirect etc
+
+        // console.log(res);
+        // if (res.status == 201) {
+        //   toast.success("Registration Successful");
+        //   reset();
+        // }
+      } else {
+        const errorData = await res.json();
+        console.error("user registration failed", responseData);
+        setFormError(responseData.message);
+      }
+    } catch (error) {
+      console.log(error, "Something went wrong");
+      setLoading(false);
+    }
+  };
+
+  const [show, setShow] = useState(false);
+  const [show2, setShow2]= useState(false)
+
+
+   const toggleeye = () => {
+    setShow(!show);
+  };
+  const toggleeye2 = () => {
+    setShow2(!show2);
+  };
+
+  const passTogle = show ? 'text' : 'password'
+  const passTogle2 = show2 ? 'text' : 'password'
+
+  
+
   return (
     <div className="signup flex justify-center items-center">
-      <form className="mt-3 lg:w-6/12 lg:h-5/6 lg:rounded-3xl lg:bg-[#ffffffee]">
-        <div className="  lg:mt-10 flex flex-col justify-center items-center">
-         
+      <Toaster position="top-center" />
 
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="-mt-3 lg:w-6/12 md:w-6/12 md:rounded-3xl md:bg-[#ffffffee] lg:rounded-3xl lg:bg-[#ffffffee] xl:w-6/12  xl:rounded-3xl xl:bg-[#ffffffee]"
+      >
+        {formError && <p className="text-red-500 font-bold">{formError}</p>}
+        <div className="  lg:mt-10 flex flex-col justify-center items-center">
           <Link href="/" className="flex items-center py-4 px-2 ">
             <Image src="/JOBME.png" width={100} height={100} alt="logo" />
           </Link>
@@ -21,43 +113,97 @@ const SignUp = () => {
           </p>
           <div className="">
             <input
+              {...register("firstname", { required: "First name is required" })}
               className="bg-transparent border-2 rounded-lg p-3 w-80 mt-5 lg:p-2"
               type="text"
               placeholder="First Name"
             />
           </div>
+          {errors.firstname && (
+            <p className="text-red-500">{errors.firstname.message}</p>
+          )}
           <div className="">
             <input
+              {...register("lastname", { required: "Last name is required" })}
               className="bg-transparent border-2 rounded-lg p-3 w-80 mt-5 lg:p-2"
               type="text"
               placeholder="Last Name"
             />
           </div>
+          {errors.lastname && (
+            <p className="text-red-500">{errors.lastname.message}</p>
+          )}
 
-          <div className="  *:">
+          <div className="">
             <input
+              {...register("email", {
+                required: "Email Address is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Invalid email address",
+                },
+              })}
               className="bg-transparent border-2 rounded-lg p-3 w-80 mt-5 lg:p-2"
               type="email"
               placeholder="Email Address"
             />
           </div>
-          <div className="  ">
+          {errors.email && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
+          <div className=" relative flex ">
             <input
+              {...register("password", {
+                required: "password is required",
+                minLength: {
+                  value: 8,
+                  message: "password must be at least 8 characters long",
+                },
+              })}
               className=" bg-transparent border-2 rounded-lg p-3 w-80 mt-5 lg:p-2"
-              type="password"
+              type={passTogle}
               id="password"
-              placeholder="Password"
+              placeholder={` ${errors.Password ? " " : "Password"}`}
             />
+
+            {show ? (
+              <IoEye onClick={toggleeye} className="absolute right-3 top-3" />
+            ) : (
+              <AiFillEyeInvisible
+                onClick={toggleeye}
+                className="absolute right-3 top-3"
+              />
+            )}
           </div>
-          <div className=" ">
+
+          {errors.password && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
+          <div className="relative flex">
             <input
+              {...register("confirmpassword", {
+                required: "confirm password is required",
+                validate: (value) =>
+                  value === password || "The passwords do not match",
+              })}
               className=" bg-transparent border-2 rounded-lg p-3 w-80 mt-5 lg:p-2 "
-              type="password"
+              type={passTogle2}
               id="password"
-              placeholder="Confirm Password"
+              placeholder={` ${errors.Password ? " " : "Password"}`}
             />
+            {show ? (
+              <IoEye onClick={toggleeye2} className="absolute right-3 top-6" />
+            ) : (
+              <AiFillEyeInvisible
+                onClick={toggleeye2}
+                className="absolute right-3"
+              />
+            )}
           </div>
-          <FaEye className="text-gray-500 absolute right-9 top-80" />
+          {errors.confirmpassword && (
+            <p className="text-red-500">{errors.confirmpassword.message}</p>
+          )}
+
           <div className="flex flex-col-2 gap-12 mt-5">
             <div className="flex gap-1">
               <div className="text-gray-600">
@@ -73,7 +219,7 @@ const SignUp = () => {
             </div>
           </div>
           <div className="bg-[#0DCAF0] text-white w-80 h-10 lg:p-2 rounded-xl text-lg mt-5 text-center p-2 ">
-            <button className="">Sign Up</button>
+            <button type="submit">{loading ? <Loading /> : "Sign Up"}</button>
           </div>
           <p className="font-semibold text-lg mt-10 lg:mt-3">
             Or continue with
@@ -119,6 +265,6 @@ const SignUp = () => {
       </form>
     </div>
   );
-}
+};
 
-export default SignUp
+export default SignUp;
