@@ -1,11 +1,35 @@
-import React from 'react'
+import withAuth from "@/components/hoc/withAuth";
+import React from "react";
+import Link from "next/link";
+
 
 const JobListing = () => {
   return (
-   <div>
-    
-   </div>
-  );
-}
+    <>
+      <div> joblisting</div>
 
-export default JobListing
+
+
+
+
+
+
+
+
+
+
+
+      
+
+      <div>
+        <Link href="/Joblisting/details-1">Apply</Link>
+        <Link href="/Joblisting/details-2">Apply</Link>
+        <Link href="/Joblisting/details-3">Apply</Link>
+      </div>
+
+
+    </>
+  );
+};
+
+export default withAuth(JobListing);

@@ -78,21 +78,18 @@ const SignUp = () => {
   };
 
   const [show, setShow] = useState(false);
-  const [show2, setShow2]= useState(false)
+  const [show2, setShow2] = useState(false);
 
-
-   const toggleeye = () => {
+  const toggle = () => {
     setShow(!show);
   };
-  const toggleeye2 = () => {
+  const toggle2 = () => {
     setShow2(!show2);
   };
 
-  const passTogle = show ? 'text' : 'password'
-  const passTogle2 = show2 ? 'text' : 'password'
 
-  
-
+  const passTogle = show ? "text" : "password";
+  const passTogle2 = show2 ? "text" : "password";
   return (
     <div className="signup flex justify-center items-center">
       <Toaster position="top-center" />
@@ -167,11 +164,11 @@ const SignUp = () => {
             />
 
             {show ? (
-              <IoEye onClick={toggleeye} className="absolute right-3 top-3" />
+              <IoEye onClick={toggle} className="absolute right-3 top-10" />
             ) : (
               <AiFillEyeInvisible
-                onClick={toggleeye}
-                className="absolute right-3 top-3"
+                onClick={toggle}
+                className="absolute right-3 top-10"
               />
             )}
           </div>
@@ -192,11 +189,11 @@ const SignUp = () => {
               placeholder={` ${errors.Password ? " " : "Password"}`}
             />
             {show ? (
-              <IoEye onClick={toggleeye2} className="absolute right-3 top-6" />
+              <IoEye onClick={toggle2} className="absolute right-3 top-10" />
             ) : (
               <AiFillEyeInvisible
-                onClick={toggleeye2}
-                className="absolute right-3"
+                onClick={toggle2}
+                className="absolute right-3 top-10"
               />
             )}
           </div>
