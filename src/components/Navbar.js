@@ -1,15 +1,25 @@
-'use client'
-import { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import Cookies from 'js-cookie';
-import logout from '../../utils/logout';
-import ProfileModal from './ProfileModal';
+"use client";
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import Cookies from "js-cookie";
+import UserCard from "./UserCard";
+
 
 const Navbar = () => {
   const [userToken, setUserToken] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const [showModal, setShowModal] = useState(false)
+  const [showLOgModal, setShowLogModal] = useState(false)
+
+  const toggleModal = ()=>{
+    setShowModal(true)
+  }
+
+  const toggleLogModal = ()=>{
+    setShowLogModal(true)
+  }
 
   useEffect(() => {
     // Only run on the client side
@@ -17,10 +27,8 @@ const Navbar = () => {
     setUserToken(token);
   }, []);
 
-  const showLink = userToken ? 'block' : 'hidden'
-  const hideLink = userToken ? 'hidden' : 'block';
-
-  
+  const showLink = userToken ? "block" : "hidden";
+  const hideLink = userToken ? "hidden" : "block";
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -29,9 +37,9 @@ const Navbar = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -69,14 +77,14 @@ const Navbar = () => {
                 Job Listings
               </Link>
               <Link
-                href="/contacts"
+                href="/AppliedJob"
                 className={`${showLink} py-4 px-2 text-black text-hover transition duration-300`}
               >
                 Applied Jobs
               </Link>
 
               <Link
-                href="/contacts"
+                href="/contact"
                 className="py-4 px-2 text-black text-hover transition duration-300"
               >
                 Contact Us
@@ -84,30 +92,7 @@ const Navbar = () => {
             </div>
 
             {userToken ? (
-              <div onClick={logout} className="hidden lg:block">
-                <div className="justify-center w-24 h-5 mt-1 border-2 border-[#000000]  rounded-full flex gap-3 p-4  items-center ">
-                  <div>
-                    <Image
-                      src="/Vector (4).png"
-                      width={250}
-                      height={150}
-                      alt="logo"
-                      className="w-full h-full"
-                    />
-                  </div>
-                  <Image src="/Line 11.png" width={1} height={2} alt="logo" />
-                  <div className="-gap-5">
-                    <Image
-                      src="/Vector (5).png"
-                      width={39}
-                      height={10}
-                      alt="logo"
-                      className="w-full h-full"
-                    />
-                  </div>
-                  {/* <div className="h-full mx-4 border-l-2  p-5 flex items-center justify-center border-black-"></div> */}
-                </div>
-              </div>
+            <UserCard/>
             ) : (
               <div className="hidden md:flex justify-center gap-3">
                 <Link
@@ -125,7 +110,8 @@ const Navbar = () => {
               </div>
             )}
 
-            <ProfileModal/>
+          
+           
 
             <div className="md:hidden flex items-center">
               <button

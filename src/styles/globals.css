@@ -160,4 +160,8 @@ body{
   max-height: 165px;  */
   
 }
+.background-c{
+    background-image: linear-gradient(to right, #0DCAF0 , #0AA0BE, #0DC8EE, #07748A);
+    
+}
 
