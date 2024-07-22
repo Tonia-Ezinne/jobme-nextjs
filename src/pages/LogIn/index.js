@@ -1,62 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { FaEye } from "react-icons/fa";
 import Link from "next/link";
-import {useForm} from 'react-hook-form';
-import Cookies from 'js-cookie'
-import { Cookie } from "next/font/google";
+import { useForm } from "react-hook-form";
+import Cookies from "js-cookie";
+// import { Cookie } from "next/font/google";
 import { useRouter } from "next/router";
-
+import Loading from "@/components/loader/Loading";
 
 const LogIn = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const {register, handleSubmit, reset, watch, formState:{errors},} = useForm();
+  const [loading, setLoading] = useState(false)
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const onSubmit = async (data)=>{
+  const onSubmit = async (data) => {
+    setLoading(true);
+
     try {
-       console.log(data);
-       const res = await fetch("api/auth/signin", {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify(data),
-       });
-       const responseData = await res.json();
-       if (res.ok) {
-         console.log("login successfull:", responseData);
+      console.log(data);
+      const res = await fetch("api/auth/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const responseData = await res.json();
+      if (res.ok) {
+        setLoading(false)
+        console.log("login successfull:", responseData);
         //  localStorage.setItem('token', responseData.userToken)
 
         //using cookies to save token instead of localstorage
         Cookies.set("token", responseData.token, {
           expires: 1,
-          secure: process.env.NODE_ENV ===
-          'production',
-          sameSite: 'strict'
-        })
-        router.push('/')
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+        });
+        router.push("/");
 
-
-         reset()
-       } else {
-         console.error("An error occured", responseData);
-       }
-    } catch (error) {
-      
-    }
-  }
-  
-
-
-
+        reset();
+      } else {
+        console.error("An error occured", responseData);
+      }
+    } catch (error) {}
+  };
 
   return (
     <div className="login flex justify-center items-center">
-      <form 
-      onSubmit={handleSubmit(onSubmit)}
-      className="mt-3 md:bg-[#ffffffee]  md:w-7/12 md:rounded-3xl lg:w-6/12 lg:rounded-3xl lg:bg-[#ffffffee] xl:w-6/12 xl:rounded-3xl xl:bg-[#ffffffee]">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-3 md:bg-[#ffffffee]  md:w-7/12 md:rounded-3xl lg:w-6/12 lg:rounded-3xl lg:bg-[#ffffffee] xl:w-6/12 xl:rounded-3xl xl:bg-[#ffffffee]"
+      >
         <div className="  lg:mt-10 flex flex-col justify-center items-center">
           <Link href="/" className="flex items-center mt-10">
             <Image src="/JOBME.png" width={100} height={100} alt="logo" />
@@ -83,16 +85,19 @@ const LogIn = () => {
               placeholder="Email Address"
             />
           </div>
-          {errors.email && (<p className="text-red-500">{errors.email.message}</p>)}
-         
-         
+          {errors.email && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
+
           <div className="relative flex ">
-            <input {...register("password", {required: "password is required", 
-              minLength: {
-                value: 8,
-                message: "password must be at least 8 characters long",
-              },
-            })}
+            <input
+              {...register("password", {
+                required: "password is required",
+                minLength: {
+                  value: 8,
+                  message: "password must be at least 8 characters long",
+                },
+              })}
               className="bg-transparent border-2 rounded-lg p-3 w-80 mt-5 lg:p-2"
               type="password"
               id="password"
@@ -102,7 +107,9 @@ const LogIn = () => {
               <FaEye className="text-gray-400 absolute right-3" />
             </button>
           </div>
-          {errors.password && (<p className="text-red-500">{errors.password.message}</p>)}
+          {errors.password && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
 
           <div className="flex flex-col-2 gap-12 mt-5">
             <div className="flex gap-1">
@@ -119,7 +126,9 @@ const LogIn = () => {
             </div>
           </div>
           <div className="bg-[#0DCAF0] text-white w-80 h-10 lg:p-2 rounded-xl text-lg mt-5 text-center p-2 ">
-            <button type="submit">Log In</button>
+            <button type="submit">
+              {loading ? <Loading /> : <span>login </span>}
+            </button>
           </div>
           <p className="text-lg mt-10 lg:mt-3">Or continue with</p>
           <div className="flex flex-row gap-3 mt-3">

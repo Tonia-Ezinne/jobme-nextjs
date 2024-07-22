@@ -85,28 +85,28 @@ export default function LogModal({show, setShow}) {
   return (
     <Dialog open={show} onClose={setShow} className="relative z-10">
       <DialogBackdrop className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-      <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <DialogPanel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:translate-y-0 sm:scale-95">
-            <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-              <div className="sm:flex sm:items-start">
-                <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+      <div className="fixed inset-0  z-10 w-screen overflow-y-auto">
+        <div className="flex min-h-full  items-end justify-end p-4 -mt-40 text-center sm:items-center sm:p-0">
+          <DialogPanel className="relative  transform overflow-hidden  rounded-lg bg-white text-left shadow-xl transition-all sm:my-8  w-96 sm:translate-y-0 sm:scale-95">
+            <div className="bg-white  flex justify-center items-center  px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+              <div className=" justify-center items-center">
+                <div className="bg-red-100 justify-center items-center flex rounded-full  sm:mx-0 h-10 w-10 mx-auto ">
                   <ExclamationTriangleIcon
-                    className="h-6 w-6 text-red-600"
+                    className="w-8 h-8   text-red-600 "
                     aria-hidden="true"
                   />
                 </div>
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                   <DialogTitle
                     as="h3"
-                    className="text-base font-semibold leading-6 text-gray-900"
+                    className="text-xl font-semibold leading-6 text-gray-900"
                   >
-                    Do you want to Log Out?
+                    Are you sure you want to Logout?
                   </DialogTitle>
                 </div>
               </div>
             </div>
-            <div className="bg-gray-50 px-4 py-3 flex  sm:px-6">
+            <div className="bg-gray-50 px-4 py-3 flex justify-center gap-5 sm:px-6">
               <button
                 type="button"
                 onClick={logout}
