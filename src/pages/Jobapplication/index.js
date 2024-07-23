@@ -1,12 +1,17 @@
 import React from 'react'
 import { useState } from 'react';
 import {useForm} from 'react-hook-form';
+import Loading from '@/components/loader/Loading';
 
 
 const Jobapplication = () => {
   const {register, handleSubmit, reset, formState:{errors},}=useForm();
+  const [loading, setLoading] = useState(false)
   const onSubmit = async (data)=>{
+    setLoading(true);
+    
     console.log(data);
+    
   }
   return (
     <div className="">
@@ -92,20 +97,18 @@ const Jobapplication = () => {
                   )}
                 </div>
               </div>
-              <div className=" md:grid md:grid-cols-1 md:w-full gap-5 mx-auto justify-center container items-center">
+              <div className="md:grid md:grid-cols-1 md:w-full gap-5 mx-auto justify-center container items-center">
                 <div className="p-1 md:order-1 mt-5">
-                  <label for="text" className="text-gray-400">
-                    {" "}
+                  <label htmlFor="text" className="text-gray-400">
                     Cover Letter*
                     <textarea
                       {...register("coverletter", {
                         required: "Cover Letter is required",
                       })}
-                      className="bg-white  rounded-lg p-2 w-full md:w-full"
-                      name="comment"
+                      className="bg-white rounded-lg p-2 w-full md:w-full"
+                      name="coverletter"
                       rows="7"
                       cols="50"
-                      form=""
                     ></textarea>
                   </label>
                   {errors.coverletter && (
@@ -113,6 +116,7 @@ const Jobapplication = () => {
                   )}
                 </div>
               </div>
+
               <div className="container mx-auto p-1">
                 <h3 className="text-gray-400 mt-5">Upload CV/Resume*</h3>
                 <input
@@ -136,7 +140,7 @@ const Jobapplication = () => {
                 </div>
                 <div className="bg-[#0DCAF0] w-24 text-center text-sm p-2 rounded-lg mt-4 mb-5">
                   <button className="text-white" type="submit">
-                    Apply Now
+                    {loading ? <Loading /> : <span>Apply Now</span>}
                   </button>
                 </div>
               </div>

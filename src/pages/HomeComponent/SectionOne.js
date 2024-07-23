@@ -26,7 +26,7 @@ const SectionOne = () => {
             placerat lacus eupiii pretium duis semper est ac nec ultricie.
           </p>
           <div>
-            <button className="text-white p-1 bg-[#0DCAF0] rounded-lg md:p-1 mt-3 lg:font-semibold">
+            <button className="text-white p-1 bg-[#0DCAF0] rounded-lg md:p-2 mt-3  hover:bg-cyan-400">
               Discover More
             </button>
           </div>
@@ -43,7 +43,7 @@ const SectionOne = () => {
             placerat lacus eupiii pretium duis semper est ac nec ultricie.
           </p>
           <div>
-            <button className="text-white p-1 bg-[#0DCAF0] rounded-lg md:p-1 mt-3 lg:font-semibold ">
+            <button className="text-white p-1 bg-[#0DCAF0] rounded-lg md:p-2 mt-3  hover:bg-cyan-400">
               Discover More
             </button>
           </div>

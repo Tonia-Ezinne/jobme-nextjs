@@ -35,6 +35,7 @@ const LogIn = () => {
       const responseData = await res.json();
       if (res.ok) {
         setLoading(false)
+        
         console.log("login successfull:", responseData);
         //  localStorage.setItem('token', responseData.userToken)
 

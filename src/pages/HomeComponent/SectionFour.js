@@ -15,7 +15,7 @@ const SectionFour = () => {
             enim dolor velit aliquam ut ac.{" "}
           </p>
           <div className="">
-            <button className="text-white  bg-[#0DCAF0] rounded-lg md:p-1 text-lg mt-5 h-9 w-36 mb-5 ">
+            <button className="text-white  bg-[#0DCAF0] rounded-lg md:p-1 text-lg mt-5 h-9 w-36 mb-5 hover:bg-cyan-400">
               Upload Your CV
             </button>
           </div>

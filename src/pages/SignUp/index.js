@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import Loading from "@/components/loader/Loading";
+import { useRouter } from "next/router";
 
 const SignUp = () => {
   const {
@@ -20,6 +21,8 @@ const SignUp = () => {
   } = useForm();
 
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const password = watch("password");
   const [formError, setFormError] = useState("");
@@ -58,6 +61,7 @@ const SignUp = () => {
         toast.success("Registration Successful");
         reset();
         setFormError("");
+        router.push("/login");
 
         //you can add additional logic here like a toast, redirect etc
 

@@ -92,7 +92,7 @@ const Navbar = () => {
             </div>
 
             {userToken ? (
-            <UserCard/>
+              <UserCard />
             ) : (
               <div className="hidden md:flex justify-center gap-3">
                 <Link
@@ -109,9 +109,6 @@ const Navbar = () => {
                 </Link>
               </div>
             )}
-
-          
-           
 
             <div className="md:hidden flex items-center">
               <button
@@ -146,9 +143,8 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            href="/joblisting"
-            className="block py-2 px-4 text-sm text-black text-hover"
-            onClick={handleLinkClick}
+            href="/Joblisting"
+            className="py-4 px-2 text-black text-hover transition duration-300"
           >
             Job Listings
           </Link>

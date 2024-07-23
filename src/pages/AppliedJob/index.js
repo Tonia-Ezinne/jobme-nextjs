@@ -1,7 +1,14 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import UpdateStatusModal from '@/components/UpdateStatusModal';
 
+
 const AppliedJobs = () => {
+  const [open, setOpen] = useState(false)
+
+  const showStatuModal = ()=>{
+    setOpen(true)
+  }
   return (
     <div className="w-11/12 container mx-auto mt-3 md:mt-10">
       <div className="border-[#0DCAF0] border-2 w-56  md:w-96 p-2 lg:w-96 xl:w-96 rounded-lg">
@@ -28,9 +35,9 @@ const AppliedJobs = () => {
         </div>
         <div className="flex gap-5 md:justify-end md:gap-20 md:mt-3 mt-5 mb-5">
           <div className=" ">
-            <h5 className="text-[#0DCAF0] border w-28 p-2 text-sm md:w-36  border-gray-400 bg-white md:text-lg text-center md:p-3 rounded-xl">
+            <button  onClick={showStatuModal} className="text-[#0DCAF0] border w-28 p-2 text-sm md:w-36  border-gray-400 bg-white md:text-lg text-center md:p-3 rounded-xl">
               Update Status
-            </h5>
+            </button>
           </div>
           <div className="  ">
             <h5 className="text-white bg-[#187609] w-24 text-sm p-2 md:w-24 md:text-lg text-center md:p-3 rounded-xl">
@@ -38,7 +45,7 @@ const AppliedJobs = () => {
             </h5>
           </div>
           <div>
-            <UpdateStatusModal />
+            <UpdateStatusModal  show={open} setShow={setOpen}/>
           </div>
         </div>
       </div>

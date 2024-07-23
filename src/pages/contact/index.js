@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import SuccessModal from "@/components/SuccessModal";
+import Loading from "@/components/loader/Loading";
+import toast from "react-hot-toast";
 
 
 
@@ -11,13 +13,62 @@ const Contact = () => {
     register,
     handleSubmit,
     reset,
-    watch,
+    
     formState: { errors },
   } = useForm();
+  
+  const [loading, setLoading] = useState(false)
+
   const [formError, setFormError] = useState("");
 
   const onSubmit = async (data) => {
+    setLoading(true);
     console.log(data);
+try {
+  const formData = {
+    name: data.name,
+    email: data.email,
+    phonenumber: data.email,
+    subject: data.subject,
+    message: data.message,
+  };
+  console.log(formData);
+  const res = await fetch("api/auth/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+
+  console.log(res);
+  setLoading(false);
+  if (res.status ===409) {
+    setFormError("User already exist");
+  }
+  const responseData = await res.json();
+  console.log(responseData);
+
+  if (res.ok) {
+    setLoading(false);
+    toast.success("Registration Successful");
+    reset();
+    setFormError("");
+
+  } else {
+    const errorData = await res.json();
+    console.error("user registration failed", responseData);
+    setFormError(responseData.message);
+  }
+  
+  
+} catch (error) {
+  console.log(error, "Something went wrong");
+  setLoading(false);
+  
+}
+
+    
   };
   return (
     <div className=" relative mb-10">
@@ -99,12 +150,12 @@ const Contact = () => {
               </div>
 
               <div className="md:grid md:grid-cols-1 md:w-full gap-5 mx-auto justify-center container items-center">
-                <div className="justify-center md:order-1">
+                <div className="justify-center md:order-1 ">
                   <textarea
                     {...register("Message", {
                       required: "Message is required",
                     })}
-                    className="bg-white rounded-lg p-2 w-56 md:w-full mt-5 md:mt-7"
+                    className="bg-white rounded-lg p-2 w-56  md:w-full mt-5 md:mt-7"
                     name="Message"
                     rows="7"
                     cols="50"
@@ -118,9 +169,9 @@ const Contact = () => {
                 <div className=" md:order-2 bg-[#0DCAF0] rounded-lg mt-5 mb-6  flex justify-center">
                   <button
                     type="submit"
-                    className="text-white w-56 md:w-full md:p-1 p-2"
+                    className="text-white w-56 md:w-full md:p-4 p-2"
                   >
-                    Send Message
+                    {loading ? <Loading /> : <span>Send Message</span>}
                   </button>
                 </div>
               </div>
@@ -154,7 +205,7 @@ const Contact = () => {
           <h2 className="text-[#0DCAF0]">23 shinghai street Lagos, Nigeria</h2>
         </div>
       </div>
-      <SuccessModal /> 
+      <SuccessModal />
     </div>
   );
 };
