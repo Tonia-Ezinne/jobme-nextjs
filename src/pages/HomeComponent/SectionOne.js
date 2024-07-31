@@ -31,7 +31,7 @@ const SectionOne = () => {
             </button>
           </div>
         </div>
-        <div className=" md:order-3 lg:order-3 mx-auto -mt-20 px-2">
+        <div className=" md:order-3 lg:order-3 mx-auto mt-5 px-2">
           <h1 className="font-semibold text-2xl lg:text-3xl xl:w-7/12">
             Looking to be one of the World’s Best Talents?
           </h1>
@@ -48,13 +48,13 @@ const SectionOne = () => {
             </button>
           </div>
         </div>
-        <div className="md:order-4 lg:order-4 md:block hidden lg:block -mt-6 mr-0">
+        <div className="md:order-4 lg:order-4 md:block hidden lg:block -mt-6 lg:mr-0">
           <Image
             src="/Frame. 12.png"
             width={600}
             height={400}
             alt="frame"
-            className="ml-20"
+            className="lg:ml-28"
           />
         </div>
       </div>

@@ -88,11 +88,11 @@ export default function LogModal({show, setShow}) {
       <div className="fixed inset-0  z-10 w-screen overflow-y-auto">
         <div className="flex min-h-full  items-end justify-end p-4 -mt-40 text-center sm:items-center sm:p-0">
           <DialogPanel className="relative  transform overflow-hidden  rounded-lg bg-white text-left shadow-xl transition-all sm:my-8  w-96 sm:translate-y-0 sm:scale-95">
-            <div className="bg-white  flex justify-center items-center  px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+            <div className="bg-white flex justify-center items-center  px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
               <div className=" justify-center items-center">
-                <div className="bg-red-100 justify-center items-center flex rounded-full  sm:mx-0 h-10 w-10 mx-auto ">
+                <div className="bg-red-100 text-center justify-center items-center flex rounded-full  w-10 h-10  mx-auto ">
                   <ExclamationTriangleIcon
-                    className="w-8 h-8   text-red-600 "
+                    className="w-10 h-10   text-red-600 "
                     aria-hidden="true"
                   />
                 </div>

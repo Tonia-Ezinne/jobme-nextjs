@@ -1,18 +1,81 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import Loading from '@/components/loader/Loading';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import withAuth from '@/components/hoc/withAuth';
+import SuccessModals from '@/components/SuccessModal'
+
 
 
 const Jobapplication = () => {
-  const {register, handleSubmit, reset, formState:{errors},}=useForm();
+  const userId = Cookies.get("userId")
+  const jobId = Cookies.get("jobId")
   const [loading, setLoading] = useState(false)
-  const onSubmit = async (data)=>{
+  const router = useRouter()
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  //const {jobId} = router.query
+
+  console.log(userId);
+  console.log(jobId);
+  // useEffect(()={..})
+  const onSubmit = async (data) => {
+    if (!userId || !jobId) {
+      console.error("User or job ID not available");
+      return;
+
+    }
     setLoading(true);
     
-    console.log(data);
+    try {
+      const formData = new FormData();
+      formData.append("userId", userId);
+      formData.append("jobId", jobId);
+      formData.append("firstName", data.firstname);
+      formData.append("lastName", data.lastname);
+      formData.append("email", data.email);
+      formData.append("phoneNumber", data.phone);
+      formData.append("coverLetter", data.coverLetter);
+      // formData.append("resume", data.resume[0]); // Assuming resume is a FileList
+
+      const response = await axios.post(
+        "/api/jobs/submitapplication",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
+      console.log("Application submitted successfully:", response.data);
+      // You can add a success message or redirect the user here
+      router.push("/AppliedJob"); // Redirect to a success page
+    } catch (error) {
+      console.error(
+        "Error submitting application:",
+        error.response?.data?.message || error.message
+      );
+      // Handle the error (e.g., show an error message to the user)
+    } finally {
+      setLoading(false);
+    }
+  };
+ 
+  // const {register, handleSubmit, reset, formState:{errors},}=useForm();
+  // const [loading, setLoading] = useState(false)
+  // const onSubmit = async (data)=>{
+  //   setLoading(true);
     
-  }
+  //   console.log(data);
+    
+  // }
   return (
     <div className="">
       <div className="mx-auto  md:w-8/12 lg:w-7/12 xl:w-8/12">
@@ -130,7 +193,11 @@ const Jobapplication = () => {
                   doc. docs. pdf
                 </p>
                 <div className="flex gap-1 bg-[#DBF7FD]">
-                  <input className="bcc" type="checkbox" />
+                  <input
+                    {...register("checkbox", { required: "This is required" })}
+                    type="checkbox"
+                    className="form-checkbox"
+                  />
                   <p className="text-gray-400">
                     I agree to the{" "}
                     <span className="text-[#0DCAF0] font-semibold text-sm">
@@ -138,6 +205,10 @@ const Jobapplication = () => {
                     </span>
                   </p>
                 </div>
+                {errors.checkbox && (
+                  <p className="text-red-500">{errors.checkbox.message}</p>
+                )}
+
                 <div className="bg-[#0DCAF0] w-24 text-center text-sm p-2 rounded-lg mt-4 mb-5">
                   <button className="text-white" type="submit">
                     {loading ? <Loading /> : <span>Apply Now</span>}
@@ -147,6 +218,8 @@ const Jobapplication = () => {
             </div>
           </div>
         </form>
+
+        <SuccessModals />
       </div>
     </div>
   );

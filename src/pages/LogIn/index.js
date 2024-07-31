@@ -4,9 +4,13 @@ import { FaEye } from "react-icons/fa";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
-// import { Cookie } from "next/font/google";
+import cookies from 'js-cookie'
 import { useRouter } from "next/router";
 import Loading from "@/components/loader/Loading";
+import { IoIosEyeOff } from "react-icons/io";
+import useFetch from "../../../hooks/useFetch";
+
+
 
 const LogIn = () => {
   const {
@@ -33,19 +37,30 @@ const LogIn = () => {
         body: JSON.stringify(data),
       });
       const responseData = await res.json();
+      console.log(responseData.token);
+
+
+      console.log(responseData.user.id);
+      Cookies.set("userId", responseData.user.id)
+      //  localStorage.setItem('token', responseData.userToken)
+
+      //using cookies to save token instead of localstorage
+      console.log(responseData.token);
+      Cookies.set("token", responseData.token, {
+        expires: 1,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+      });
+      router.push("/joblisting");
+      
+
       if (res.ok) {
         setLoading(false)
+        setSigninError("")
         
         console.log("login successfull:", responseData);
-        //  localStorage.setItem('token', responseData.userToken)
+        //setUserId
 
-        //using cookies to save token instead of localstorage
-        Cookies.set("token", responseData.token, {
-          expires: 1,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "strict",
-        });
-        router.push("/");
 
         reset();
       } else {
@@ -53,6 +68,13 @@ const LogIn = () => {
       }
     } catch (error) {}
   };
+
+  const [show, setShow] = useState(false);
+  const toggle = () => {
+    setShow(!show);
+  };
+
+  const passTogle = show ? "text" : "password";
 
   return (
     <div className="login flex justify-center items-center">
@@ -100,13 +122,22 @@ const LogIn = () => {
                 },
               })}
               className="bg-transparent border-2 rounded-lg p-3 w-80 mt-5 lg:p-2"
-              type="password"
+              type={passTogle}
               id="password"
-              placeholder="Password"
+              placeholder={` ${errors.Password ? "" : "Password"}`}
             />
-            <button>
-              <FaEye className="text-gray-400 absolute right-3" />
-            </button>
+
+            {show ? (
+              <FaEye
+                onClick={toggle}
+                className="text-gray-400 absolute right-3 top-8 "
+              />
+            ) : (
+              <IoIosEyeOff
+                onClick={toggle}
+                className="text-gray-400 absolute right-3 top-8"
+              />
+            )}
           </div>
           {errors.password && (
             <p className="text-red-500">{errors.password.message}</p>

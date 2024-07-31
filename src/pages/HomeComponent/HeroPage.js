@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image';
-import HeroDropDown from './HeroDropDown';
+// import HeroDropDown from './HeroDropDown';
 
 const HeroPage = () => {
   return (
@@ -15,7 +15,7 @@ const HeroPage = () => {
           </button>
         </div>
         <div className='hidden md:block lg:block w-full mt-10'>
-          <HeroDropDown/>
+          {/* <HeroDropDown/> */}
         </div>
       </div>
     </div>

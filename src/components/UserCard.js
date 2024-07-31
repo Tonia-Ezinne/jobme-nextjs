@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import ProfileModal from './ProfileModal'
 import LogModal from './LogModal'
+import useFetch from '../../hooks/useFetch'
 
 
 const UserCard = () => {

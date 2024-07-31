@@ -24,6 +24,7 @@ const Navbar = () => {
   useEffect(() => {
     // Only run on the client side
     const token = Cookies.get("token");
+    console.log(token);
     setUserToken(token);
   }, []);
 
@@ -64,6 +65,7 @@ const Navbar = () => {
               </div>
             </div>
             <div className="hidden md:flex items-center space-x-1 gap-4">
+              
               <Link
                 href="/"
                 className={`${hideLink} py-4 px-2 text-black text-hover transition duration-300`}
@@ -71,7 +73,7 @@ const Navbar = () => {
                 Home
               </Link>
               <Link
-                href="/Joblisting"
+                href="/joblisting"
                 className="py-4 px-2 text-black text-hover transition duration-300"
               >
                 Job Listings
@@ -143,7 +145,7 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            href="/Joblisting"
+            href="/joblisting"
             className="py-4 px-2 text-black text-hover transition duration-300"
           >
             Job Listings
