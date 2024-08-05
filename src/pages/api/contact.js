@@ -2,7 +2,6 @@
 import connectMongoDB from "../../../lib/mongodb";
 import Contact from "../../../models/Contact";
 
-
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { name, email, phonenumber, subject, message } = req.body;
