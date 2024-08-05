@@ -546,7 +546,7 @@ export default function JobDetail() {
     if (id) {
       fetchJob();
     }
-  }, [id]);
+  }, []);
 
 
 
