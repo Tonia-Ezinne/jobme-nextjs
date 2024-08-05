@@ -516,7 +516,6 @@ import { IoIosCheckmark } from "react-icons/io";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import Card from "@/pages/HomeComponent/Card";
-import MapComponent from "@/components/MapComponent";
 import Cookies from 'js-cookie'
 import useFetch from "../../../../hooks/useFetch";
 
@@ -619,7 +618,7 @@ export default function JobDetail() {
             </div>
           </div>
           <div className="rounded-xl  mt-5">
-            <MapComponent/>
+            {/* <MapComponent/> */}
           </div>
         </div>
 
